@@ -1,0 +1,172 @@
+import React, { Component } from 'react'
+import api from '../api'
+
+import styled from 'styled-components'
+
+const Title = styled.h1.attrs({
+    className: 'h1',
+})``
+
+const Wrapper = styled.div.attrs({
+    className: 'form-group',
+})`
+    margin: 0 30px;
+`
+
+const Label = styled.label`
+    margin: 5px;
+`
+
+const InputText = styled.input.attrs({
+    className: 'form-control',
+})`
+    margin: 5px;
+`
+
+const Button = styled.button.attrs({
+    className: `btn btn-primary`,
+})`
+    margin: 15px 15px 15px 5px;
+`
+
+const CancelButton = styled.a.attrs({
+    className: `btn btn-danger`,
+})`
+    margin: 15px 15px 15px 5px;
+`
+
+class QuizInsert extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            questiontxt: '',
+            choice1: '',
+            choice2: '',
+            choice3: '',
+            choice4: '',
+            answer: '',
+            subject: '',
+            time: ''
+        }
+    }
+
+
+    handleChangequestiontxt= async event => {
+        const questiontxt = event.target.value
+        this.setState({questiontxt})
+        console.log(questiontxt);
+    }
+
+    handleChangechoice1= async event => {
+        const choice1 = event.target.value
+        this.setState({ choice1 });
+    }
+    handleChangechoice2= async event => {
+        const choice2 = event.target.value
+        this.setState({ choice2 });
+    }
+    handleChangechoice3= async event => {
+        const choice3 = event.target.value
+        this.setState({ choice3 });
+    }
+    handleChangechoice4= async event => {
+        const choice4 = event.target.value
+        this.setState({ choice4 });
+    }
+    handleChangeanswer= async event => {
+        const answer = event.target.value
+        this.setState({ answer });
+    }
+    handleChangesubject= async event =>{
+        const subject = event.target.value
+        this.setState({ subject });
+    }
+    handleChangetime= async event => {
+        const time = event.target.value
+        this.setState({ time });
+    }
+
+    handleIncludeQuiz = async () => {
+        const { questiontxt, choice1,choice2,choice3,choice4, answer, subject, time } = this.state
+        const payload = { questiontxt, choice1,choice2,choice3,choice4, answer, subject, time }
+
+        await api.insertQuiz(payload).then(res => {
+            window.alert(`Movie inserted successfully`)
+            this.setState({
+                questiontxt: '',
+                choice: '',
+                answer: '',
+                subject: '',
+                time: ''
+            })
+        })
+    }
+
+    render() {
+        const { questiontxt, choice1,choice2,choice3,choice4, answer, subject, time } = this.state
+        return (
+            <Wrapper>
+                <Title>Create Quize</Title>
+
+                <Label>Question: </Label>
+                <InputText
+                    type="text"
+                    value={questiontxt}
+                    onChange={this.handleChangequestiontxt}
+                    placeholder="question text....."
+                />
+                <Label>Choice: </Label>
+                <InputText
+                    type="text"
+                    value={choice1}
+                    onChange={this.handleChangechoice1}
+                    placeholder="choice1"
+                />
+                <InputText
+                    type="text"
+                    value={choice2}
+                    onChange={this.handleChangechoice2}
+                    placeholder="choice2"
+                />
+                <InputText
+                    type="text"
+                    value={choice3}
+                    onChange={this.handleChangechoice3}
+                    placeholder="choice3"
+                />
+                <InputText
+                    type="text"
+                    value={choice4}
+                    onChange={this.handleChangechoice4}
+                    placeholder="choice4"
+                />
+                <Label>Answer: </Label>
+                <InputText
+                    type="text"
+                    value={answer}
+                    onChange={this.handleChangeanswer}
+                    placeholder="answer"
+                />
+                <Label>Subject: </Label>
+                <InputText
+                    type="text"
+                    value={subject}
+                    onChange={this.handleChangesubject}
+                    placeholder="subject"
+                />
+                <Label>Time: </Label>
+                <InputText
+                    type="text"
+                    value={time}
+                    onChange={this.handleChangetime}
+                    placeholder="time"
+                />
+                <Button onClick={this.handleIncludeQuiz}>Add Question</Button>
+                <CancelButton href={'/Quiz'}>Cancel</CancelButton>
+            </Wrapper>
+        )
+    }
+}
+
+export default QuizInsert;
