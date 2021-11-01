@@ -7,3 +7,11 @@
   according to id.
 
 # setup
+
+```js
+git clone https://github.com/shashankpk31/Quiz-Application-In-Mern.git
+
+npm install
+
+npm start
+```
