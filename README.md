@@ -1,4 +1,4 @@
-# Movie Rating Application
+# Quize  Application
 
 ## About Application
 - Basically this application is created for the purpose of Learning how Crud Operation Works in Nodejs and also how to connect express rest api with React and render data on React application.
